@@ -1,19 +1,29 @@
 #!/usr/bin/env python
+'''Simply gets a number, 
+and returns the numberth number in the fibonacci sequence
+'''
 
-cache = {0:0, 1:0, 2:1}
+import sys
+
+cache = [0, 1]
 
 def fib(n):
-    if n not in cache:
-        cache[n] = fib(n - 1) + fib(n - 2)
-    return cache[n]
+    n = n - 2 # we know the first two numbers...
+    while n:
+        cache.append(cache[-1] + cache[-2])
+        n -= 1
+    print "you created a list with a memory footprint of %d \
+    bytes" % (sys.getsizeof(cache))
+    return cache[-1]
+
 
 def main():
-    fib_num = 0
-    fib_num = int(raw_input('which number do you need?\n'))
-    numth_num = str(fib(fib_num))
+    num = 0
+    num = int(raw_input('which number of the fibonacci sequenece do you need?\n'))
+    fib_num = fib(num)
     
     if fib_num:
-        print "the %dth number in fib is: %d" % (fib_num, fib(fib_num))
+        print "The %sth number in the fibonacci sequence is: %d" % (num, fib_num)
 
 if __name__ == '__main__':
     main()
